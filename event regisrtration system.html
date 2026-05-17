@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Registration System</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      font-family:Arial;
+    }
+
+    body{
+      margin:0;
+      background:#f5e2cf;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+    }
+
+    .box{
+      width:400px;
+      background:white;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);
+    }
+
+    h2{
+      text-align:center;
+      margin-bottom:20px;
+      color:#444;
+    }
+
+    label{
+      display:block;
+      margin-top:10px;
+      margin-bottom:5px;
+    }
+
+    input,select{
+      width:100%;
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:8px;
+    }
+
+    button{
+      width:100%;
+      padding:10px;
+      margin-top:20px;
+      border:none;
+      border-radius:8px;
+      background:#c78b59;
+      color:white;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#a96d3f;
+    }
+
+    .hasil{
+      margin-top:20px;
+      padding:15px;
+      background:#f3f3f3;
+      border-radius:10px;
+      display:none;
+    }
+
+    .hasil p{
+      margin:8px 0;
+    }
+
+    .logo{
+      text-align:center;
+      font-size:55px;
+      margin-bottom:10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+  <div class="logo">🎫</div>
+  <h2>Event Registration</h2>
+
+  <label>Nama</label>
+  <input type="text" id="nama">
+
+  <label>Email</label>
+  <input type="text" id="email">
+
+  <label>Usia</label>
+  <input type="number" id="usia">
+
+  <label>Member</label>
+  <select id="member">
+    <option value="true">True</option>
+    <option value="false">False</option>
+  </select>
+
+  <label>Voucher</label>
+  <select id="voucher">
+    <option value="true">True</option>
+    <option value="false">False</option>
+  </select>
+
+  <label>Kuota Terisi</label>
+  <input type="number" id="kuota">
+
+  <button onclick="daftar()">Daftar Event</button>
+
+  <div class="hasil" id="hasil">
+    <p>Nama : <span id="outNama"></span></p>
+    <p>Email : <span id="outEmail"></span></p>
+    <p>Usia : <span id="outUsia"></span></p>
+    <p>Member : <span id="outMember"></span></p>
+    <p>Voucher : <span id="outVoucher"></span></p>
+    <p>Status : <span id="outStatus"></span></p>
+  </div>
+
+</div>
+
+<script>
+
+function daftar(){
+
+  let nama = document.getElementById("nama").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let usia = document.getElementById("usia").value;
+  let kuota = document.getElementById("kuota").value;
+
+  // BOOLEAN (konversi sesuai requirement dosen)
+  let member = document.getElementById("member").value === "true";
+  let voucher = document.getElementById("voucher").value === "true";
+
+  // NULL / EMPTY
+  if(!nama) return alert("Nama harus diisi");
+  if(nama.length < 3) return alert("Nama minimal 3 karakter");
+
+  if(!email) return alert("Email harus diisi");
+  if(email.indexOf("@") === -1) return alert("Format email tidak valid");
+
+  if(!usia) return alert("Usia harus diisi");
+  if(isNaN(usia)) return alert("Usia harus angka");
+  if(usia < 0 || usia > 100) return alert("Usia harus 0 - 100");
+
+  if(!kuota) return alert("Kuota harus diisi");
+  if(isNaN(kuota)) return alert("Kuota harus angka");
+  if(kuota < 0 || kuota > 150) return alert("Kuota tidak valid");
+
+  // OUTPUT
+  document.getElementById("outNama").innerHTML = nama;
+  document.getElementById("outEmail").innerHTML = email;
+  document.getElementById("outUsia").innerHTML = usia;
+  document.getElementById("outMember").innerHTML = member;
+  document.getElementById("outVoucher").innerHTML = voucher;
+  document.getElementById("outStatus").innerHTML = "Registrasi Berhasil";
+
+  document.getElementById("hasil").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
